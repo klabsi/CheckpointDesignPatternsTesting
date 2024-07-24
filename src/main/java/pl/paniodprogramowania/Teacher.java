@@ -1,25 +1,17 @@
 package pl.paniodprogramowania;
 
+import lombok.Builder;
+
+import java.util.List;
+
+@Builder
 public class Teacher {
-  private String name;
-  private String surname;
-  private String city;
-  private Student student;
+    private PersonalData personalData;
+    private List<Student> students;
 
-  public Teacher(String name, String surname, String city) {
-    this.name = name;
-    this.surname = surname;
-    this.city = city;
-  }
-
-  public Teacher(String name, String surname, String city, Student student) {
-    this.name = name;
-    this.surname = surname;
-    this.city = city;
-    this.student = student;
-  }
-
-  public void setHomework(Homework homework){
-    this.student.addHomework(homework);
-  }
+    public void setHomework(List<Homework> homework) {
+        for (Student student : students) {
+            student.addHomework(homework);
+        }
+    }
 }
