@@ -15,6 +15,7 @@ public class Runner {
                         .build())
                 .lesson(Lesson.builder().lessonGroupId(4).lessonId(1).build())
                 .homeworks(new ArrayList<>())
+                .homeworkCompleting(new HomeworkWithInternet())
                 .build();
 
         Student studentPiotr = Student.builder()
@@ -24,6 +25,7 @@ public class Runner {
                         .city("Warszawa")
                         .build())
                 .homeworks(new ArrayList<>())
+                .homeworkCompleting(new HomeworkWithoutInternet())
                 .build();
 
         Teacher teacherAnia = Teacher.builder()
@@ -37,7 +39,7 @@ public class Runner {
         teacherAnia.setHomework(new ArrayList<>(Arrays.asList
                 (new PracticalHomework("do this exercise", Instant.parse("2024-09-15T21:35:00.00Z")),
                         new ArticleHomework("read this article", Instant.parse("2024-09-15T21:35:00.00Z")))));
-        studentBeata.doHomework(true);
+        studentBeata.doHomework(studentBeata.getHomeworks());
 
         Teacher teacherWojtek = Teacher.builder()
                 .personalData(PersonalData.builder()
@@ -50,6 +52,6 @@ public class Runner {
         teacherWojtek.setHomework(new ArrayList<>(Arrays.asList
                 (new PracticalHomework("do this exercise", Instant.parse("2024-09-15T21:35:00.00Z")),
                 new ArticleHomework("read this article", Instant.parse("2024-09-15T21:35:00.00Z")))));
-        studentPiotr.doHomework(false);
+        studentPiotr.doHomework(studentPiotr.getHomeworks());
     }
 }
