@@ -3,8 +3,5 @@ package pl.paniodprogramowania;
 import lombok.Builder;
 
 @Builder
-public class PersonalData {
-    private String name;
-    private String surname;
-    private String city;
+public record PersonalData (String name, String surname, String city) {
 }

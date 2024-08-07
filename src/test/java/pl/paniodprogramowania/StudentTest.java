@@ -3,6 +3,7 @@ package pl.paniodprogramowania;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -13,54 +14,54 @@ public class StudentTest {
   public void shouldDoAllHomeworkWhenHasInternet(){
     //given
     List<Homework> homeworks = new ArrayList<>();
-    homeworks.add(new PracticalHomework());
-    homeworks.add(new ArticleHomework());
+    homeworks.add(new PracticalHomework("anyPracticalHomework", Instant.now()));
+    homeworks.add(new ArticleHomework("anyArticleHomework", Instant.now()));
     Student student = Student.builder()
             .personalData(PersonalData.builder().name("Anna").surname("Herrman").city("anyCity").build())
-            .homework(homeworks)
+            .homeworks(homeworks)
             .build();
 
     //when
     student.doHomework(true);
 
     //then
-    assertEquals(0, student.getHomework().size());
+    assertEquals(0, student.getHomeworks().size());
   }
 
   @Test
   public void shouldNotDoAllHomeworkWhenHasNoInternet(){
     //given
     List<Homework> homeworks = new ArrayList<>();
-    homeworks.add(new PracticalHomework());
-    homeworks.add(new ArticleHomework());
+    homeworks.add(new PracticalHomework("anyPracticalHomework", Instant.now()));
+    homeworks.add(new ArticleHomework("anyArticleHomework", Instant.now()));
     Student student = Student.builder()
             .personalData(PersonalData.builder().name("Anna").surname("Herrman").city("anyCity").build())
-            .homework(homeworks)
+            .homeworks(homeworks)
             .build();
 
     //when
     student.doHomework(false);
 
     //then
-    assertEquals(1, student.getHomework().size());
+    assertEquals(1, student.getHomeworks().size());
   }
 
   @Test
   public void shouldDoAllHomeworkWhenHasNoInternetButPracticalHomework(){
     //given
     List<Homework> homeworks = new ArrayList<>();
-    homeworks.add(new PracticalHomework());
-    homeworks.add(new PracticalHomework());
+    homeworks.add(new PracticalHomework("anyPracticalHomework", Instant.now()));
+    homeworks.add(new PracticalHomework("anyPracticalHomework", Instant.now()));
     Student student = Student.builder()
             .personalData(PersonalData.builder().name("Anna").surname("Herrman").city("anyCity").build())
-            .homework(homeworks)
+            .homeworks(homeworks)
             .build();
 
     //when
     student.doHomework(false);
 
     //then
-    assertEquals(0, student.getHomework().size());
+    assertEquals(0, student.getHomeworks().size());
   }
 
   @Test
@@ -69,13 +70,13 @@ public class StudentTest {
     List<Homework> homeworks = new ArrayList<>();
     Student student = Student.builder()
             .personalData(PersonalData.builder().name("Anna").surname("Herrman").city("anyCity").build())
-            .homework(homeworks)
+            .homeworks(homeworks)
             .build();
 
     //when
     student.doHomework(false);
 
     //then
-    assertEquals(0, student.getHomework().size());
+    assertEquals(0, student.getHomeworks().size());
   }
 }

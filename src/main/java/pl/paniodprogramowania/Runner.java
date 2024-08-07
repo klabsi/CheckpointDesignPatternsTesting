@@ -1,5 +1,6 @@
 package pl.paniodprogramowania;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +14,7 @@ public class Runner {
                         .city("Krakow")
                         .build())
                 .lesson(Lesson.builder().lessonGroupId(4).lessonId(1).build())
-                .homework(new ArrayList<>())
+                .homeworks(new ArrayList<>())
                 .build();
 
         Student studentPiotr = Student.builder()
@@ -22,7 +23,7 @@ public class Runner {
                         .surname("Wojcik")
                         .city("Warszawa")
                         .build())
-                .homework(new ArrayList<>())
+                .homeworks(new ArrayList<>())
                 .build();
 
         Teacher teacherAnia = Teacher.builder()
@@ -33,7 +34,9 @@ public class Runner {
                         .build())
                 .students(new ArrayList<>(Collections.singletonList(studentBeata)))
                 .build();
-        teacherAnia.setHomework(new ArrayList<>(Arrays.asList(new PracticalHomework(), new ArticleHomework())));
+        teacherAnia.setHomework(new ArrayList<>(Arrays.asList
+                (new PracticalHomework("do this exercise", Instant.parse("2024-09-15T21:35:00.00Z")),
+                        new ArticleHomework("read this article", Instant.parse("2024-09-15T21:35:00.00Z")))));
         studentBeata.doHomework(true);
 
         Teacher teacherWojtek = Teacher.builder()
@@ -44,7 +47,9 @@ public class Runner {
                         .build())
                 .students(new ArrayList<>(Collections.singletonList(studentPiotr)))
                 .build();
-        teacherWojtek.setHomework(new ArrayList<>(Arrays.asList(new PracticalHomework(), new ArticleHomework())));
+        teacherWojtek.setHomework(new ArrayList<>(Arrays.asList
+                (new PracticalHomework("do this exercise", Instant.parse("2024-09-15T21:35:00.00Z")),
+                new ArticleHomework("read this article", Instant.parse("2024-09-15T21:35:00.00Z")))));
         studentPiotr.doHomework(false);
     }
 }
